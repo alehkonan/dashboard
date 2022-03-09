@@ -1,7 +1,14 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Layout } from './layout';
+import { Dashboard } from './pages/dashboard';
+
 export default function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Simplenight</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/dashboard" />} />
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
+    </Routes>
   );
 }
