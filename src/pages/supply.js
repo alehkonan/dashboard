@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const DashboardPage = () => {
+export const SupplyPage = () => {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <h2>Supply Manager</h2>
     </div>
   );
 };

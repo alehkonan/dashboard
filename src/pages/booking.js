@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const DashboardPage = () => {
+export const BookingPage = () => {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <h2>Booking</h2>
     </div>
   );
 };
