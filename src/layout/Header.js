@@ -5,7 +5,7 @@ import { UserControls } from './UserControls';
 
 export const Header = () => {
   return (
-    <header className="flex bg-gray-50">
+    <header className="flex bg-gray-100">
       <h1 className="sr-only">Simplenight</h1>
       <MainLogo />
       <Navigation />

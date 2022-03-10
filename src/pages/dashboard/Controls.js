@@ -12,7 +12,7 @@ export const Controls = () => {
       <button>
         <CloudIcon className="text-primary hover:text-secondary" />
       </button>
-      <Button>Add Product</Button>
+      <Button primary>Add Product</Button>
     </div>
   );
 };
