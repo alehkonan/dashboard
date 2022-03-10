@@ -1,0 +1,10 @@
+<svg width="50" height="50" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Dashboard</title>
+  <ellipse stroke-width="0" ry="50" rx="50" id="svg_1" cy="50" cx="50" fill="#009da9"/>
+  <rect id="svg_2" height="41.87436" width="30" y="19.12395" x="17.62549" fill="#ffffff"/>
+  <rect id="svg_4" height="15.37477" width="30" y="64.99825" x="17.75049" fill="#ffffff"/>
+  <rect id="svg_6" height="41.87436" width="30" y="38.87365" x="53" fill="#ffffff"/>
+  <rect id="svg_7" height="15.37477" width="30" y="19.37395" x="53" fill="#ffffff"/>
+ </g>
+</svg>
