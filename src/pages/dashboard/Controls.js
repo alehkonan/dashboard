@@ -5,7 +5,7 @@ import { ReactComponent as ShareIcon } from './share.svg';
 
 export const Controls = () => {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-5">
       <button>
         <ShareIcon className="text-primary hover:text-secondary" />
       </button>
