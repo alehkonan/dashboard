@@ -60,8 +60,11 @@ export const SalesPerformance = () => {
       title="Salese Performance"
       inputs={
         <div className="flex items-center gap-3">
-          <RadioGroup name="currency" options={['$', '%']} />
-          <RadioGroup name="type" options={['Products', 'Venues']} />
+          <RadioGroup name="salesPerformanceSign" options={['$', '%']} />
+          <RadioGroup
+            name="salesPerformanceService"
+            options={['Products', 'Venues']}
+          />
         </div>
       }
     >

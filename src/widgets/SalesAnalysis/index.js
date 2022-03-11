@@ -55,8 +55,11 @@ export const SalesAnalysis = () => {
         <InfoLabel text="Current" color="#009da9" />
         <InfoLabel text="Comparison" color="#007982" />
         <Button secondary>Reset</Button>
-        <RadioGroup name="appearanceChoise" options={['$', '%']} />
-        <RadioGroup name="serviceChoise" options={['Products', 'Venues']} />
+        <RadioGroup name="salesAnalysisSign" options={['$', '%']} />
+        <RadioGroup
+          name="salesAnalysisService"
+          options={['Products', 'Venues']}
+        />
       </div>
       <nav className="border-b-4 mt-[-20px]">
         <ul className="flex">
