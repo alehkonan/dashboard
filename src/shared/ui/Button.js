@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Button = ({ children, primary, secondary }) => {
-  let className = 'h-10 p-2';
+  let className = 'flex items-center h-10 p-3 font-medium text-sm';
   if (primary) {
     className += ' text-white bg-primary hover:bg-secondary';
   }
