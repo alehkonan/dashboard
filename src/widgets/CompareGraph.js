@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import {
   Area,
   AreaChart,
-  CartesianAxis,
   CartesianGrid,
   ResponsiveContainer,
   XAxis,
