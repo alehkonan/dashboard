@@ -1,47 +1,7 @@
 import React from 'react';
-import { incomes } from '../data/incomes';
-import { InfoLabel } from '../shared/ui/InfoLabel';
-
-const HIGH_AMOUNT = 50000;
-const MEDIUM_AMOUNT = 30000;
-const LOW_AMOUNT = 10000;
-
-const weekDays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-const dayHours = [
-  '12AM',
-  '1AM',
-  '2AM',
-  '3AM',
-  '4AM',
-  '5AM',
-  '6AM',
-  '7AM',
-  '8AM',
-  '9AM',
-  '10AM',
-  '11AM',
-  '12PM',
-  '1PM',
-  '2PM',
-  '3PM',
-  '4PM',
-  '5PM',
-  '6PM',
-  '7PM',
-  '8PM',
-  '9PM',
-  '10PM',
-  '11PM',
-];
+import { AMOUNTS, DAY_HOURS, WEEK_DAYS } from '../../constants';
+import { incomes } from '../../data/incomes';
+import { InfoLabel } from '../../shared/ui/InfoLabel';
 
 export const BestHoursGraph = () => {
   const detailedIncome = incomes.map((income) => ({
@@ -78,7 +38,8 @@ export const BestHoursGraph = () => {
   return (
     <div className="w-full relative">
       <div className="grid grid-cols-9 gap-1">
-        {['', ...weekDays, ''].map((day) => (
+        <div />
+        {WEEK_DAYS.map((day) => (
           <span key={day} className="uppercase text-sm text-center">
             {day}
           </span>
@@ -86,7 +47,7 @@ export const BestHoursGraph = () => {
       </div>
       <div className="grid grid-cols-9 gap-1 h-60 overflow-y-scroll">
         <div className="grid grid-cols-1 gap-1">
-          {dayHours.map((hour) => (
+          {DAY_HOURS.map((hour) => (
             <span key={hour} className="uppercase text-sm text-center">
               {hour}
             </span>
@@ -94,24 +55,22 @@ export const BestHoursGraph = () => {
         </div>
         <div className="col-span-7 grid grid-cols-7 gap-1">
           {cells.map(({ id, amount }) => {
-            let colorClass;
-
-            if (amount >= HIGH_AMOUNT) {
-              colorClass = 'bg-red-300';
-            } else if (amount >= MEDIUM_AMOUNT) {
-              colorClass = 'bg-orange-300';
-            } else if (amount >= LOW_AMOUNT) {
-              colorClass = 'bg-yellow-300';
-            }
-
-            return <div key={id} className={`w-full h-5 ${colorClass}`} />;
+            const { color } =
+              Object.values(AMOUNTS).find(({ value }) => amount >= value) || {};
+            return (
+              <div
+                key={id}
+                className="w-full h-5"
+                style={{ backgroundColor: color }}
+              />
+            );
           })}
         </div>
       </div>
       <div className="absolute right-5 top-1/4">
-        <InfoLabel color="#d91600" text="Highest" />
-        <InfoLabel color="#d97f00" text="Medium" />
-        <InfoLabel color="#d9ce00" text="Lowest" />
+        {Object.values(AMOUNTS).map(({ id, text, color }) => (
+          <InfoLabel key={id} color={color} text={text} />
+        ))}
       </div>
     </div>
   );

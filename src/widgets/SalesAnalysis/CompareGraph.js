@@ -7,7 +7,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { incomes } from '../data/incomes';
+import { incomes } from '../../data/incomes';
 
 export const CompareGraph = () => {
   const thisMonthIncome = useMemo(() => {

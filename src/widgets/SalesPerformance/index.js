@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { incomes } from '../data/incomes';
-import { Widget } from '../layout/Widget';
-import { RadioGroup } from '../shared/ui/RadioGroup';
-import { calculateAmount } from '../utils/calculateAmount';
+import { incomes } from '../../data/incomes';
+import { Widget } from '../../layout/Widget';
+import { RadioGroup } from '../../shared/ui/RadioGroup';
+import { calculateAmount } from '../../utils/calculateAmount';
 import { PerformanceCard } from './PerformanceCard';
 
 export const SalesPerformance = () => {
@@ -67,7 +67,7 @@ export const SalesPerformance = () => {
     >
       <div className="grid grid-cols-5 gap-6">
         {performance.map(({ period, amount }) => (
-          <PerformanceCard period={period} amount={amount} />
+          <PerformanceCard key={period} period={period} amount={amount} />
         ))}
       </div>
     </Widget>

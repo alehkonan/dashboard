@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatMoney } from '../utils/formatMoney';
+import { formatMoney } from '../../utils/formatMoney';
 
 export const PerformanceCard = ({ period, amount }) => {
   return (

@@ -6,9 +6,9 @@ import { DatePicker } from '../../shared/ui/DatePicker';
 import { InfoLabel } from '../../shared/ui/InfoLabel';
 import { RadioGroup } from '../../shared/ui/RadioGroup';
 import { Select } from '../../shared/ui/Select';
-import { BestHoursGraph } from '../BestHoursGraph';
-import { CompareGraph } from '../CompareGraph';
-import { ThisMonthGraph } from '../ThisMonthGraph';
+import { BestHoursGraph } from './BestHoursGraph';
+import { CompareGraph } from './CompareGraph';
+import { ThisMonthGraph } from './ThisMonthGraph';
 
 const Inputs = () => {
   return (
