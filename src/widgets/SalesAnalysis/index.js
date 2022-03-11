@@ -25,15 +25,33 @@ const Inputs = () => {
   );
 };
 
+const analysOptions = [
+  {
+    id: 1,
+    label: 'This Month',
+    value: 'this_month',
+  },
+  {
+    id: 2,
+    label: 'Compare',
+    value: 'compare',
+  },
+  {
+    id: 3,
+    label: 'Best Hours',
+    value: 'best_hours',
+  },
+];
+
 export const SalesAnalysis = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   const searchParams = new URLSearchParams(search);
-  const filter = searchParams.get('filter');
+  const analys = searchParams.get('analys');
 
   return (
     <Widget title="Sales Analysis" inputs={<Inputs />}>
-      <div className="flex gap-2 justify-end mt-3">
+      <div className="flex gap-3 justify-end mt-3">
         <InfoLabel text="Current" color="#009da9" />
         <InfoLabel text="Comparison" color="#007982" />
         <Button secondary>Reset</Button>
@@ -42,36 +60,25 @@ export const SalesAnalysis = () => {
       </div>
       <nav className="border-b-4 mt-[-20px]">
         <ul className="flex">
-          <li
-            className={`p-3 cursor-pointer border-b-4 mb-[-4px] ${
-              !filter || filter === 'this_month' ? 'border-primary' : ''
-            } uppercase`}
-            onClick={() => navigate({ search: 'filter=this_month' })}
-          >
-            This Month
-          </li>
-          <li
-            className={`p-3 cursor-pointer border-b-4 mb-[-4px] ${
-              filter === 'compare' ? 'border-primary' : ''
-            } uppercase`}
-            onClick={() => navigate({ search: 'filter=compare' })}
-          >
-            Compare
-          </li>
-          <li
-            className={`p-3 cursor-pointer border-b-4 mb-[-4px] ${
-              filter === 'best_hours' ? 'border-primary' : ''
-            } uppercase`}
-            onClick={() => navigate({ search: 'filter=best_hours' })}
-          >
-            Best Hours
-          </li>
+          {analysOptions.map(({ id, label, value }, index) => (
+            <li
+              key={id}
+              className={`p-3 cursor-pointer border-b-4 mb-[-4px] ${
+                (!analys && index === 0) || analys === value
+                  ? 'border-primary'
+                  : ''
+              } uppercase hover:bg-primary hover:bg-opacity-10 hover:border-primary`}
+              onClick={() => navigate({ search: `analys=${value}` })}
+            >
+              {label}
+            </li>
+          ))}
         </ul>
       </nav>
       <div className="mt-3">
-        {(!filter || filter === 'this_month') && <ThisMonthGraph />}
-        {filter === 'compare' && <CompareGraph />}
-        {filter === 'best_hours' && <BestHoursGraph />}
+        {(!analys || analys === 'this_month') && <ThisMonthGraph />}
+        {analys === 'compare' && <CompareGraph />}
+        {analys === 'best_hours' && <BestHoursGraph />}
       </div>
     </Widget>
   );
