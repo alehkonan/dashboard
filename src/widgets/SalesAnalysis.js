@@ -1,5 +1,14 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  CartesianGrid,
+  AreaChart,
+  XAxis,
+  YAxis,
+  Area,
+  ResponsiveContainer,
+} from 'recharts';
+import { incomeAnotherMonth, incomeOneMonth } from '../data/income';
 import { Widget } from '../layout/Widget';
 import { Button } from '../shared/ui/Button';
 import { DatePicker } from '../shared/ui/DatePicker';
@@ -66,7 +75,29 @@ export const SalesAnalysis = () => {
         </ul>
       </nav>
       <div className="mt-3">
-        <p>Graph</p>
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+            <Area
+              data={incomeAnotherMonth}
+              type="linear"
+              dataKey="income"
+              stroke="#009da9"
+              fill="#73ecff"
+              fillOpacity={0.5}
+            />
+            <Area
+              data={incomeOneMonth}
+              type="linear"
+              dataKey="income"
+              stroke="#009da9"
+              fill="#009da9"
+              fillOpacity={0.5}
+            />
+            <CartesianGrid />
+            <XAxis dataKey="date" />
+            <YAxis unit="$" />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
     </Widget>
   );
