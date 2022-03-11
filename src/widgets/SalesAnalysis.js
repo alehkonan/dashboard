@@ -1,20 +1,14 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  CartesianGrid,
-  AreaChart,
-  XAxis,
-  YAxis,
-  Area,
-  ResponsiveContainer,
-} from 'recharts';
-import { incomeAnotherMonth, incomeOneMonth } from '../data/income';
 import { Widget } from '../layout/Widget';
 import { Button } from '../shared/ui/Button';
 import { DatePicker } from '../shared/ui/DatePicker';
 import { InfoLabel } from '../shared/ui/InfoLabel';
 import { RadioGroup } from '../shared/ui/RadioGroup';
 import { Select } from '../shared/ui/Select';
+import { BestHoursGraph } from './BestHoursGraph';
+import { CompareGraph } from './CompareGraph';
+import { ThisMonthGraph } from './ThisMonthGraph';
 
 const Inputs = () => {
   return (
@@ -50,7 +44,7 @@ export const SalesAnalysis = () => {
         <ul className="flex">
           <li
             className={`p-3 cursor-pointer border-b-4 mb-[-4px] ${
-              filter === 'this_month' ? 'border-primary' : ''
+              !filter || filter === 'this_month' ? 'border-primary' : ''
             } uppercase`}
             onClick={() => navigate({ search: 'filter=this_month' })}
           >
@@ -75,29 +69,9 @@ export const SalesAnalysis = () => {
         </ul>
       </nav>
       <div className="mt-3">
-        <ResponsiveContainer width="100%" height={300}>
-          <AreaChart margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
-            <Area
-              data={incomeAnotherMonth}
-              type="linear"
-              dataKey="income"
-              stroke="#009da9"
-              fill="#73ecff"
-              fillOpacity={0.5}
-            />
-            <Area
-              data={incomeOneMonth}
-              type="linear"
-              dataKey="income"
-              stroke="#009da9"
-              fill="#009da9"
-              fillOpacity={0.5}
-            />
-            <CartesianGrid />
-            <XAxis dataKey="date" />
-            <YAxis unit="$" />
-          </AreaChart>
-        </ResponsiveContainer>
+        {(!filter || filter === 'this_month') && <ThisMonthGraph />}
+        {filter === 'compare' && <CompareGraph />}
+        {filter === 'best_hours' && <BestHoursGraph />}
       </div>
     </Widget>
   );
