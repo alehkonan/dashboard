@@ -1,22 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   Area,
   AreaChart,
-  CartesianAxis,
   CartesianGrid,
-  Legend,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
-import { incomes } from '../../data/incomes';
-import startOfMonth from 'date-fns/startOfMonth';
-import endOfMonth from 'date-fns/endOfMonth';
-import eachDayOfInterval from 'date-fns/eachDayOfInterval';
-import getDate from 'date-fns/getDate';
 import format from 'date-fns/format';
-import parseISO from 'date-fns/parseISO';
 import { formatMoney } from '../../utils/formatMoney';
 
 export const Graph = ({ data, currentDataColor, compareDataColor }) => {
