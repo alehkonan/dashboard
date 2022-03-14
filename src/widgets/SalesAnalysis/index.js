@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Widget } from '../../layout/Widget';
 import { Button } from '../../shared/ui/Button';
@@ -8,7 +8,19 @@ import { RadioGroup } from '../../shared/ui/RadioGroup';
 import { Select } from '../../shared/ui/Select';
 import { BestHoursGraph } from './BestHoursGraph';
 import { CompareGraph } from './CompareGraph';
+import { Graph } from './Graph';
 import { ThisMonthGraph } from './ThisMonthGraph';
+import startOfMonth from 'date-fns/startOfMonth';
+import endOfMonth from 'date-fns/endOfMonth';
+import eachDayOfInterval from 'date-fns/eachDayOfInterval';
+import getDate from 'date-fns/getDate';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
+import sub from 'date-fns/sub';
+import add from 'date-fns/add';
+import isEqual from 'date-fns/isEqual';
+import { incomes } from '../../data/incomes';
+import { calculateAmount } from '../../utils/calculateAmount';
 
 const Inputs = () => {
   return (
@@ -49,6 +61,45 @@ export const SalesAnalysis = () => {
   const searchParams = new URLSearchParams(search);
   const analys = searchParams.get('analys');
 
+  const thisMonthIncome = useMemo(() => {
+    const today = new Date();
+    const start = startOfMonth(today);
+    const end = endOfMonth(today);
+    const eachDay = eachDayOfInterval({ start, end });
+    return eachDay.map((date) => {
+      const monthIncome = incomes.filter((income) => {
+        const incomeDate = income.date.substring(0, 10);
+        return isEqual(date, parseISO(incomeDate));
+      });
+      return {
+        amount: calculateAmount(monthIncome) || null,
+        date,
+      };
+    });
+  }, []);
+
+  const thisWithPrevMonthIncome = useMemo(() => {
+    const today = new Date();
+    const start = startOfMonth(today);
+    const end = endOfMonth(today);
+    const eachDay = eachDayOfInterval({ start, end });
+    return eachDay.map((date) => {
+      const prevMonthIncome = incomes.filter((income) => {
+        const incomeDate = income.date.substring(0, 10);
+        return isEqual(date, add(parseISO(incomeDate), { months: 1 }));
+      });
+      const currMonthIncome = incomes.filter((income) => {
+        const incomeDate = income.date.substring(0, 10);
+        return isEqual(date, parseISO(incomeDate));
+      });
+      return {
+        prevAmount: calculateAmount(prevMonthIncome) || null,
+        amount: calculateAmount(currMonthIncome) || null,
+        date,
+      };
+    });
+  }, []);
+
   return (
     <Widget title="Sales Analysis" inputs={<Inputs />}>
       <div className="flex gap-3 justify-end mt-3">
@@ -79,8 +130,16 @@ export const SalesAnalysis = () => {
         </ul>
       </nav>
       <div className="mt-3">
-        {(!analys || analys === 'this_month') && <ThisMonthGraph />}
-        {analys === 'compare' && <CompareGraph />}
+        {(!analys || analys === 'this_month') && (
+          <Graph data={thisMonthIncome} currentDataColor="#73ecff" />
+        )}
+        {analys === 'compare' && (
+          <Graph
+            data={thisWithPrevMonthIncome}
+            currentDataColor="#73ecff"
+            compareDataColor="#009da9"
+          />
+        )}
         {analys === 'best_hours' && <BestHoursGraph />}
       </div>
     </Widget>

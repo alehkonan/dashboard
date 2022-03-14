@@ -12,9 +12,9 @@ import { incomes } from '../../data/incomes';
 export const CompareGraph = () => {
   const thisMonthIncome = useMemo(() => {
     const currentMonth = new Date().getMonth();
-    return incomes
-      .map((income) => ({ ...income, date: new Date(income.date) }))
-      .filter((income) => income.date.getMonth() === currentMonth);
+    return incomes.filter(
+      (income) => new Date(income.date).getMonth() === currentMonth
+    );
   }, []);
   const prevMonthIncome = useMemo(() => {
     const prevMonth = new Date().getMonth() - 1;

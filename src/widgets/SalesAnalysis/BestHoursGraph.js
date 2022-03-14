@@ -2,6 +2,7 @@ import React from 'react';
 import { AMOUNTS, DAY_HOURS, WEEK_DAYS } from '../../constants';
 import { incomes } from '../../data/incomes';
 import { InfoLabel } from '../../shared/ui/InfoLabel';
+import { calculateAmount } from '../../utils/calculateAmount';
 
 export const BestHoursGraph = () => {
   const detailedIncome = incomes.map((income) => ({
@@ -23,10 +24,7 @@ export const BestHoursGraph = () => {
           income.dayOfWeek === cell.dayOfWeek && income.hour === cell.hour
       );
       if (cellsWithIncome.length) {
-        const amount = cellsWithIncome.reduce(
-          (prev, acc) => prev + acc.amount,
-          0
-        );
+        const amount = calculateAmount(cellsWithIncome);
         return {
           ...cell,
           amount,
