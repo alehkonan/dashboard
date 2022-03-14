@@ -97,7 +97,11 @@ export const Graph = ({ data, currentDataColor, compareDataColor }) => {
           tickMargin={-50}
           tickFormatter={(amount) => formatMoney(amount)}
         />
-        <CartesianGrid opacity={0.1} horizontal={false} />
+        <CartesianGrid
+          stroke="#fff"
+          horizontal={false}
+          transform="translate(30)"
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
