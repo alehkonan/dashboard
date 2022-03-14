@@ -14,7 +14,7 @@ export const Graph = ({ data, currentDataColor, compareDataColor }) => {
   return (
     <ResponsiveContainer width="100%" height={200}>
       <AreaChart
-        margin={{ top: 10, right: 10, left: -30, bottom: 10 }}
+        margin={{ top: 10, right: 10, left: -20, bottom: 10 }}
         data={data}
       >
         <defs>
@@ -85,7 +85,7 @@ export const Graph = ({ data, currentDataColor, compareDataColor }) => {
           axisLine={false}
           tickLine={false}
           tickCount={3}
-          tickMargin={-50}
+          tickMargin={-20}
           tickFormatter={(amount) => formatMoney(amount)}
         />
         <CartesianGrid
