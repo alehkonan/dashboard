@@ -6,7 +6,7 @@ export const Navigation = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className="flex-1 text-primary">
+    <div className="text-primary">
       <nav className="h-full">
         <ul className="h-full flex">
           {Object.values(routes).map(({ id, to, title }) => (
