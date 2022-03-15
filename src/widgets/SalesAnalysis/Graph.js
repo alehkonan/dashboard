@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Area,
   AreaChart,
@@ -9,13 +9,32 @@ import {
 } from 'recharts';
 import format from 'date-fns/format';
 import { formatMoney } from '../../utils/formatMoney';
+import { useLocation } from 'react-router-dom';
+import { incomes } from '../../data/incomes';
+import { ANALYS_OPTIONS, ANALYS_QUERY, COMPARE_MONTH_QUERY } from './constants';
+import { getMonthIncome } from './utils';
+import { BestHoursGraph } from './BestHoursGraph';
 
-export const Graph = ({ data, currentDataColor, compareDataColor }) => {
+export const Graph = () => {
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const analysQuery = searchParams.get(ANALYS_QUERY);
+  const compareMonth = searchParams.get(COMPARE_MONTH_QUERY);
+
+  const monthIncome = useMemo(
+    () => getMonthIncome(incomes, compareMonth),
+    [compareMonth]
+  );
+
+  if (analysQuery === ANALYS_OPTIONS.bestHours.query) {
+    return <BestHoursGraph />;
+  }
+
   return (
     <ResponsiveContainer width="100%" height={200}>
       <AreaChart
         margin={{ top: 10, right: 10, left: -20, bottom: 10 }}
-        data={data}
+        data={monthIncome}
       >
         <defs>
           <linearGradient
@@ -32,7 +51,7 @@ export const Graph = ({ data, currentDataColor, compareDataColor }) => {
         </defs>
         <defs>
           <linearGradient
-            color={currentDataColor}
+            color="#73ecff"
             id="currentDataFillColor"
             x1="0"
             y1="0"
@@ -45,7 +64,7 @@ export const Graph = ({ data, currentDataColor, compareDataColor }) => {
         </defs>
         <defs>
           <linearGradient
-            color={compareDataColor}
+            color="#009da9"
             id="compareDataFillColor"
             x1="0"
             y1="0"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AMOUNTS, DAY_HOURS, WEEK_DAYS } from '../../constants';
+import { AMOUNTS, DAY_HOURS, WEEK_DAYS } from './constants';
 import { incomes } from '../../data/incomes';
 import { InfoLabel } from '../../shared/ui/InfoLabel';
 import { calculateAmount } from '../../utils/calculateAmount';
