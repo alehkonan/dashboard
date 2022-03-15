@@ -1,3 +1,24 @@
+export const ANALYS_QUERY = 'analys';
+export const COMPARE_MONTH_QUERY = 'compare_month';
+
+export const ANALYS_OPTIONS = {
+  thisMonth: {
+    id: 1,
+    label: 'This Month',
+    query: 'this_month',
+  },
+  compare: {
+    id: 2,
+    label: 'Compare',
+    query: 'compare',
+  },
+  bestHours: {
+    id: 3,
+    label: 'Best Hours',
+    query: 'best_hours',
+  },
+};
+
 export const AMOUNTS = {
   high: {
     id: 1,
