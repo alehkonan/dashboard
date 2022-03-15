@@ -21,7 +21,7 @@ export const SalesPerformance = () => {
         </div>
       }
     >
-      <div className="flex justify-center flex-wrap gap-5">
+      <div className="flex justify-between flex-wrap gap-5">
         {periods.map(({ period, amount }) => (
           <PerformanceCard key={period} period={period} amount={amount} />
         ))}
