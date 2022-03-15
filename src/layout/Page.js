@@ -8,7 +8,7 @@ export const Page = ({ title, icon, controls, children }) => {
         <h2 className="flex-1 text-3xl font-thin opacity-60">{title}</h2>
         <div>{controls}</div>
       </div>
-      <div className="px-20">{children}</div>
+      <div className="px-28">{children}</div>
     </div>
   );
 };
